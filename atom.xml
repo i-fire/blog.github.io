@@ -6,7 +6,7 @@
   <link href="https://i-fire.top/atom.xml" rel="self"/>
   
   <link href="https://i-fire.top/"/>
-  <updated>2021-03-13T06:56:23.266Z</updated>
+  <updated>2021-03-18T08:07:07.616Z</updated>
   <id>https://i-fire.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>树的存储结构</title>
+    <link href="https://i-fire.top/post/treeModel.html"/>
+    <id>https://i-fire.top/post/treeModel.html</id>
+    <published>2021-03-18T08:04:49.000Z</published>
+    <updated>2021-03-18T08:07:07.616Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="二叉树的存储结构"><a href="#二叉树的存储结构" class="headerlink" title="二叉树的存储结构"></a>二叉树的存储结构</h1><h3 id="二叉树的顺序存储结构"><a href="#二叉树的顺序存储结构" class="headerlink" title="二叉树的顺序存储结构"></a>二叉树的顺序存储结构</h3><p>二叉树的顺序存储结构，指的是使用数组存储二叉树，但是需要注意的是顺序存储只适合用于存储完全二叉树。<br><strong>因此：如果我们想存储普通的二叉树，需要提前将普通二叉树转换为完全二叉树</strong></p><blockquote><p>满二叉树也可以使用顺序存储。要知道，满二叉树也是完全二叉树，因为它满足完全二叉树的所有特征。</p></blockquote><p>普通二叉树转换成完全二叉树的方法很简单，只需要给二叉树额外的添加一些节点，经其拼凑成完全二叉树</p><p><img src="https://cdn.jsdelivr.net/gh/i-fire/blog-pic@main/usr/20210318081507.png"></p><p>完全二叉树的顺序存储，仅需要从根节点开始，按照层次依次将树中节点存储到数组中<br><img src="https://cdn.jsdelivr.net/gh/i-fire/blog-pic@main/usr/20210318081908.png"></p><p><img src="https://cdn.jsdelivr.net/gh/i-fire/blog-pic@main/usr/20210318081958.png"></p><p><img src="https://cdn.jsdelivr.net/gh/i-fire/blog-pic@main/usr/20210318082023.png"></p><h3 id="二叉树的链式存储结构"><a href="#二叉树的链式存储结构" class="headerlink" title="二叉树的链式存储结构"></a>二叉树的链式存储结构</h3><p>从二叉树的顺序存储中可以看出，二叉树实际上不适合用数组进行存储，因为<strong>并不是每个二叉树都是完全二叉树</strong>，普通二叉树使用顺序表多多少少会存在浪费空间的现象，因此引入了二叉树的链式存储结构。<br><img src="https://cdn.jsdelivr.net/gh/i-fire/blog-pic@main/usr/20210318083131.png"></p><p>如图所示，这是一个普通的二叉树，若将其采用链式存储结构，则需要从树的根节点开始，将各个节点及其左右孩子使用链表存储即可<br><img src="https://cdn.jsdelivr.net/gh/i-fire/blog-pic@main/usr/20210318083321.png"></p><p>由图 2 可知，采用链式存储二叉树时，其节点结构由 3 部分构成（如图 3 所示）：</p><ul><li>指向左孩子节点的指针（Lchild）；</li><li>节点存储的数据（data）；</li><li>指向右孩子节点的指针（Rchild）；</li></ul><p><img src="https://cdn.jsdelivr.net/gh/i-fire/blog-pic@main/usr/20210318083845.png"></p>]]></content>
+    
+    
+    <summary type="html">数据结构，树，树的存储结构</summary>
+    
+    
+    
+    <category term="数据结构" scheme="https://i-fire.top/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+    <category term="数据结构与算法" scheme="https://i-fire.top/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    <category term="树" scheme="https://i-fire.top/tags/%E6%A0%91/"/>
+    
+  </entry>
   
   <entry>
     <title>二叉树</title>
@@ -449,27 +472,6 @@
     
     
     <category term="数据结构" scheme="https://i-fire.top/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>博客成立啦</title>
-    <link href="https://i-fire.top/post/blogcreate.html"/>
-    <id>https://i-fire.top/post/blogcreate.html</id>
-    <published>2020-11-14T02:21:16.000Z</published>
-    <updated>2020-11-15T09:00:04.600Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="博客成立啦"><a href="#博客成立啦" class="headerlink" title="博客成立啦"></a>博客成立啦</h1><p>当你看到这个页面，说明博客创建成功</p>]]></content>
-    
-    
-    <summary type="html">博客成立</summary>
-    
-    
-    
-    <category term="大事记录" scheme="https://i-fire.top/categories/%E5%A4%A7%E4%BA%8B%E8%AE%B0%E5%BD%95/"/>
-    
-    
-    <category term="生活" scheme="https://i-fire.top/tags/%E7%94%9F%E6%B4%BB/"/>
     
   </entry>
   
