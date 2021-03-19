@@ -1,0 +1,311 @@
+<!DOCTYPE html><html class="hide-aside" lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>遍历二叉树 | Fire's Blog</title><meta name="keywords" content="数据结构，遍历二叉树"><meta name="author" content="烟火小兽"><meta name="copyright" content="烟火小兽"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="数据结构，遍历二叉树">
+<meta property="og:type" content="article">
+<meta property="og:title" content="遍历二叉树">
+<meta property="og:url" content="https://i-fire.top/post/traverBinaryTree.html">
+<meta property="og:site_name" content="Fire&#39;s Blog">
+<meta property="og:description" content="数据结构，遍历二叉树">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/i-fire/blog-pic@main/usr/20201117200915.jpg">
+<meta property="article:published_time" content="2021-03-19T12:45:29.000Z">
+<meta property="article:modified_time" content="2021-03-19T12:47:36.872Z">
+<meta property="article:author" content="烟火小兽">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="树">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/i-fire/blog-pic@main/usr/20201117200915.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://i-fire.top/post/traverBinaryTree"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="preconnect" href="//zz.bdstatic.com"/><meta name="baidu-site-verification" content="69cRFZS5xLVcEw8i"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.10.5/dist/instantsearch.min.css"><script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.10.5/dist/instantsearch.min.js" defer></script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?922ac8a778de003c2a3af4edd912a3b8";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"WT2LQG7DWT","apiKey":"82f0e1ab361052b56953a1521cce0aa2","indexName":"ifire","hits":{"per_page":6},"languages":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}.","hits_stats":"${hits} results found in ${time} ms"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: 烟火小兽","link":"Link: ","source":"Source: Fire's Blog","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-03-19 20:47:36'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Fire's Blog" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">22</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">18</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-laptop"></i><span> 旗下站点</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" target="_blank" rel="noopener external nofollow noreferrer" href="https://52sign.top"><i class="fa-fw fas fa-leaf"></i><span> 我爱签到网</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-thumbs-up"></i><span> 生活</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/categories/%E5%A4%A7%E4%BA%8B%E8%AE%B0%E5%BD%95/"><i class="fa-fw fas fa-certificate"></i><span> 大事记录</span></a></li><li><a class="site-page" href="/categories/%E5%BF%83%E6%83%85%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-certificate"></i><span> 心情随笔</span></a></li><li><a class="site-page" href="/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7/"><i class="fa-fw fa fa-calendar"></i><span> 小技巧</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-terminal"></i><span> 编程技术</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><i class="fa-fw fas fa-asterisk"></i><span> 数据结构</span></a></li><li><a class="site-page" href="/categories/%E7%AE%97%E6%B3%95/"><i class="fa-fw fas  fa-code"></i><span> 算法</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 朋友们</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-list"></i><span> 其他</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/atom.xml"><i class="fa-fw fas fa-rss"></i><span> RSS订阅</span></a></li><li><a class="site-page" href="/sitemap.xml"><i class="fa-fw fas fa-sitemap"></i><span> 站点地图</span></a></li></ul></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/gh/i-fire/blog-pic@main/usr/20201117200915.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Fire's Blog</a></span><span id="menus"><div id="search_button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-laptop"></i><span> 旗下站点</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" target="_blank" rel="noopener external nofollow noreferrer" href="https://52sign.top"><i class="fa-fw fas fa-leaf"></i><span> 我爱签到网</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-thumbs-up"></i><span> 生活</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/categories/%E5%A4%A7%E4%BA%8B%E8%AE%B0%E5%BD%95/"><i class="fa-fw fas fa-certificate"></i><span> 大事记录</span></a></li><li><a class="site-page" href="/categories/%E5%BF%83%E6%83%85%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-certificate"></i><span> 心情随笔</span></a></li><li><a class="site-page" href="/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7/"><i class="fa-fw fa fa-calendar"></i><span> 小技巧</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-terminal"></i><span> 编程技术</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><i class="fa-fw fas fa-asterisk"></i><span> 数据结构</span></a></li><li><a class="site-page" href="/categories/%E7%AE%97%E6%B3%95/"><i class="fa-fw fas  fa-code"></i><span> 算法</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 朋友们</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-list"></i><span> 其他</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/atom.xml"><i class="fa-fw fas fa-rss"></i><span> RSS订阅</span></a></li><li><a class="site-page" href="/sitemap.xml"><i class="fa-fw fas fa-sitemap"></i><span> 站点地图</span></a></li></ul></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><h1 class="post-title">遍历二叉树</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2021-03-19T12:45:29.000Z" title="Created 2021-03-19 20:45:29">2021-03-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2021-03-19T12:47:36.872Z" title="Updated 2021-03-19 20:47:36">2021-03-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">2.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>8min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="二叉树的遍历"><a href="#二叉树的遍历" class="headerlink" title="二叉树的遍历"></a>二叉树的遍历</h1><h3 id="二叉树的先序遍历"><a href="#二叉树的先序遍历" class="headerlink" title="二叉树的先序遍历"></a>二叉树的先序遍历</h3><p>所谓二叉树的先序遍历指的是</p>
+<ul>
+<li>先遍历根节点</li>
+<li>访问当前节点的左子树</li>
+<li>如果当前节点没有左子树，那么就访问右子树</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/i-fire/blog-pic@main/usr/20210318210610.png"></p>
+<p>以图一为例：</p>
+<ul>
+<li>先访问根节点，得到节点1</li>
+<li>访问节点1的左子树，得到节点2</li>
+<li>访问节点2的左子树，得到节点4</li>
+<li>访问节点4的左子树，发现没有左子树，继续访问节点4的右子树，发现没有右子树，此时返回到节点4的上一级节点2</li>
+<li>访问节点2的右子树，得到节点5</li>
+<li>由于节点 5 无左右子树，因此节点 5 遍历完成，并且由此以节点 2 为根节点的子树也遍历完成。现在回到节点 1 ，并开始遍历该节点的右子树，即访问节点 3</li>
+<li>访问节点 3 左子树，找到节点 6</li>
+<li>由于节点 6 无左右子树，因此节点 6 遍历完成，回到节点 3 并遍历其右子树，找到节点 7</li>
+<li>节点 7 无左右子树，因此以节点 3 为根节点的子树遍历完成，同时回归节点 1。由于节点 1 的左右子树全部遍历完成，因此整个二叉树遍历完成</li>
+</ul>
+<blockquote>
+<p>因此图一二叉树的先序遍历的访问顺序是1,2,4,5,3,6,7</p>
+</blockquote>
+<h4 id="先序遍历的递归实现"><a href="#先序遍历的递归实现" class="headerlink" title="先序遍历的递归实现"></a>先序遍历的递归实现</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="comment">//构造结点的结构体</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">BiTNode</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span>  data;<span class="comment">//数据域</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">BiTNode</span>* <span class="title">lchild</span>, * <span class="title">rchild</span>;</span><span class="comment">//左右孩子指针</span></span><br><span class="line">&#125;BiTNode, * BiTree;</span><br><span class="line"><span class="comment">//初始化树的函数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">CreateBiTree</span><span class="params">(BiTree* T)</span></span>;</span><br><span class="line"><span class="comment">//递归先序遍历二叉树</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PreOrderTraverse</span><span class="params">(BiTree* T)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">	BiTree Tree;</span><br><span class="line">	CreateBiTree(&amp;Tree);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;先序遍历: \n&quot;</span>);</span><br><span class="line">	PreOrderTraverse(Tree);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">CreateBiTree</span><span class="params">(BiTree* T)</span> </span>&#123;</span><br><span class="line">	*T = (BiTNode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(BiTNode));</span><br><span class="line">	(*T)-&gt;data = <span class="number">1</span>;</span><br><span class="line">	(*T)-&gt;lchild = (BiTNode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(BiTNode));</span><br><span class="line">	(*T)-&gt;rchild = (BiTNode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(BiTNode));</span><br><span class="line"></span><br><span class="line">	(*T)-&gt;lchild-&gt;data = <span class="number">2</span>;</span><br><span class="line">	(*T)-&gt;lchild-&gt;lchild = (BiTNode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(BiTNode));</span><br><span class="line">	(*T)-&gt;lchild-&gt;rchild = (BiTNode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(BiTNode));</span><br><span class="line">	(*T)-&gt;lchild-&gt;rchild-&gt;data = <span class="number">5</span>;</span><br><span class="line">	(*T)-&gt;lchild-&gt;rchild-&gt;lchild = <span class="literal">NULL</span>;</span><br><span class="line">	(*T)-&gt;lchild-&gt;rchild-&gt;rchild = <span class="literal">NULL</span>;</span><br><span class="line">	(*T)-&gt;rchild-&gt;data = <span class="number">3</span>;</span><br><span class="line">	(*T)-&gt;rchild-&gt;lchild = (BiTNode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(BiTNode));</span><br><span class="line">	(*T)-&gt;rchild-&gt;lchild-&gt;data = <span class="number">6</span>;</span><br><span class="line">	(*T)-&gt;rchild-&gt;lchild-&gt;lchild = <span class="literal">NULL</span>;</span><br><span class="line">	(*T)-&gt;rchild-&gt;lchild-&gt;rchild = <span class="literal">NULL</span>;</span><br><span class="line">	(*T)-&gt;rchild-&gt;rchild = (BiTNode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(BiTNode));</span><br><span class="line">	(*T)-&gt;rchild-&gt;rchild-&gt;data = <span class="number">7</span>;</span><br><span class="line">	(*T)-&gt;rchild-&gt;rchild-&gt;lchild = <span class="literal">NULL</span>;</span><br><span class="line">	(*T)-&gt;rchild-&gt;rchild-&gt;rchild = <span class="literal">NULL</span>;</span><br><span class="line">	(*T)-&gt;lchild-&gt;lchild-&gt;data = <span class="number">4</span>;</span><br><span class="line">	(*T)-&gt;lchild-&gt;lchild-&gt;lchild = <span class="literal">NULL</span>;</span><br><span class="line">	(*T)-&gt;lchild-&gt;lchild-&gt;rchild = <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PreOrderTraverse</span><span class="params">(BiTNode* T)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (T) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;当前二叉树节点的值是：%d\n&quot;</span>, T-&gt;data);</span><br><span class="line">		PreOrderTraverse(T-&gt;lchild);</span><br><span class="line">		PreOrderTraverse(T-&gt;rchild);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="先序遍历的非递归实现"><a href="#先序遍历的非递归实现" class="headerlink" title="先序遍历的非递归实现"></a>先序遍历的非递归实现</h4><p>先序遍历的非递归实现依靠的是栈这样的存储结构，因为使用栈我们可以模拟出递归的思想</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">treeNode</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> data;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">treeNode</span>* <span class="title">lchild</span>, * <span class="title">rchild</span>;</span></span><br><span class="line">&#125;BiTNode, * BiTree;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">stack</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> top;</span><br><span class="line">	BiTNode* arr[<span class="number">20</span>];</span><br><span class="line">&#125; s;</span><br><span class="line"></span><br><span class="line"><span class="comment">//进栈</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(s* <span class="built_in">stack</span>, BiTNode* node)</span></span>;</span><br><span class="line"><span class="comment">//出栈</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pop</span><span class="params">(s* <span class="built_in">stack</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//取栈顶元素</span></span><br><span class="line"><span class="function">BiTNode* <span class="title">getNode</span><span class="params">(s* <span class="built_in">stack</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//先序遍历二叉树</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">preOrderTraverse</span><span class="params">(BiTree* root)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">createBiTree</span><span class="params">(BiTree* T)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">	BiTree root;</span><br><span class="line">	createBiTree(&amp;root);</span><br><span class="line">	preOrderTraverse(root);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">createBiTree</span><span class="params">(BiTree* T)</span> </span>&#123;</span><br><span class="line">	(*T) = (BiTNode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(BiTNode));</span><br><span class="line">	(*T)-&gt;data = <span class="number">1</span>;</span><br><span class="line">	(*T)-&gt;lchild = (BiTNode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(BiTNode));</span><br><span class="line">	(*T)-&gt;lchild-&gt;data = <span class="number">2</span>;</span><br><span class="line">	(*T)-&gt;lchild-&gt;lchild = (BiTNode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(BiTNode));</span><br><span class="line">	(*T)-&gt;lchild-&gt;rchild = (BiTNode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(BiTNode));</span><br><span class="line">	(*T)-&gt;lchild-&gt;rchild-&gt;data = <span class="number">5</span>;</span><br><span class="line">	(*T)-&gt;lchild-&gt;rchild-&gt;lchild = <span class="literal">NULL</span>;</span><br><span class="line">	(*T)-&gt;lchild-&gt;rchild-&gt;rchild = <span class="literal">NULL</span>;</span><br><span class="line">	(*T)-&gt;rchild-&gt;data = <span class="number">3</span>;</span><br><span class="line">	(*T)-&gt;rchild-&gt;lchild = (BiTNode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(BiTNode));</span><br><span class="line">	(*T)-&gt;rchild-&gt;lchild-&gt;data = <span class="number">6</span>;</span><br><span class="line">	(*T)-&gt;rchild-&gt;lchild-&gt;lchild = <span class="literal">NULL</span>;</span><br><span class="line">	(*T)-&gt;rchild-&gt;lchild-&gt;rchild = <span class="literal">NULL</span>;</span><br><span class="line">	(*T)-&gt;rchild-&gt;rchild = (BiTNode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(BiTNode));</span><br><span class="line">	(*T)-&gt;rchild-&gt;rchild-&gt;data = <span class="number">7</span>;</span><br><span class="line">	(*T)-&gt;rchild-&gt;rchild-&gt;lchild = <span class="literal">NULL</span>;</span><br><span class="line">	(*T)-&gt;rchild-&gt;rchild-&gt;rchild = <span class="literal">NULL</span>;</span><br><span class="line">	(*T)-&gt;lchild-&gt;lchild-&gt;data = <span class="number">4</span>;</span><br><span class="line">	(*T)-&gt;lchild-&gt;lchild-&gt;lchild = <span class="literal">NULL</span>;</span><br><span class="line">	(*T)-&gt;lchild-&gt;lchild-&gt;rchild = <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(s* <span class="built_in">stack</span>, BiTNode* node)</span> </span>&#123;</span><br><span class="line">	<span class="built_in">stack</span>-&gt;arr[++<span class="built_in">stack</span>-&gt;top] = node;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pop</span><span class="params">(s* <span class="built_in">stack</span>)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">stack</span>-&gt;top == <span class="number">-1</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">stack</span>-&gt;top--;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">BiTNode* <span class="title">getNode</span><span class="params">(s* <span class="built_in">stack</span>)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">stack</span>-&gt;top == <span class="number">-1</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">stack</span>-&gt;arr[<span class="built_in">stack</span>-&gt;top];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">preOrderTraverse</span><span class="params">(BiTree root)</span> </span>&#123;</span><br><span class="line">	s* st = (s*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(s));</span><br><span class="line">	st-&gt;top = <span class="number">-1</span>;</span><br><span class="line">	BiTNode* p;<span class="comment">//定义一个临时变量</span></span><br><span class="line">	push(st, root);<span class="comment">//根节点进栈</span></span><br><span class="line">	<span class="keyword">while</span> (st-&gt;top != <span class="number">-1</span>) &#123;</span><br><span class="line">		p = getNode(st);<span class="comment">//取栈顶元素</span></span><br><span class="line">		pop(st);</span><br><span class="line">		<span class="keyword">while</span> (p) &#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;当前节点是%d\n&quot;</span>, p-&gt;data);</span><br><span class="line">			<span class="keyword">if</span> (p-&gt;rchild) &#123;<span class="comment">//如果当前的p节点还有右孩子，那么就让右孩子进栈</span></span><br><span class="line">				push(st, p-&gt;rchild);</span><br><span class="line">			&#125;</span><br><span class="line">			p = p-&gt;lchild;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="二叉树的中序遍历"><a href="#二叉树的中序遍历" class="headerlink" title="二叉树的中序遍历"></a>二叉树的中序遍历</h3><p>所谓二叉树的先序遍历指的是</p>
+<ul>
+<li>访问当前节点的左子树</li>
+<li>访问当前的节点</li>
+<li>访问当前节点的右子树</li>
+</ul>
+<p>以图 1 为例，采用中序遍历的思想遍历该二叉树的过程为：</p>
+<ul>
+<li>访问该二叉树的根节点，找到 1</li>
+<li>遍历节点 1 的左子树，找到节点 2；</li>
+<li>遍历节点 2 的左子树，找到节点 4；</li>
+<li>由于节点 4 无左孩子，因此找到节点 4，并遍历节点 4 的右子树；</li>
+<li>由于节点 4 无右子树，因此节点 2 的左子树遍历完成，访问节点 2；</li>
+<li>遍历节点 2 的右子树，找到节点 5；</li>
+<li>由于节点 5 无左子树，因此访问节点 5 ，又因为节点 5 没有右子树，因此节点 1 的左子树遍历完成，访问节点 1 ，并遍历节点 1 的右子树，找到节点 3</li>
+<li>遍历节点 3 的左子树，找到节点 6</li>
+<li>由于节点 6 无左子树，因此访问节点 6，又因为该节点无右子树，因此节点 3 的左子树遍历完成，开始访问节点 3 ，并遍历节点 3 的右子树，找到节点 7</li>
+<li>由于节点 7 无左子树，因此访问节点 7，又因为该节点无右子树，因此节点 1 的右子树遍历完成，即整棵树遍历完成；</li>
+</ul>
+<blockquote>
+<p>因此图一二叉树的中序遍历的访问顺序是4 2 5 1 6 3 7</p>
+</blockquote>
+<h4 id="中序遍历递归实现"><a href="#中序遍历递归实现" class="headerlink" title="中序遍历递归实现"></a>中序遍历递归实现</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//其余代码请参照先序遍历递归实现</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InOrderTraverse1</span><span class="params">(BiTNode* T)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (T) &#123;</span><br><span class="line">		PreOrderTraverse(T-&gt;lchild);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;当前二叉树节点的值是：%d\n&quot;</span>, T-&gt;data);</span><br><span class="line">		InOrderTraverse1(T-&gt;rchild);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="中序遍历非递归实现"><a href="#中序遍历非递归实现" class="headerlink" title="中序遍历非递归实现"></a>中序遍历非递归实现</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InOrderTraverse1</span><span class="params">(BiTree root)</span> </span>&#123;</span><br><span class="line">	s* st = (s*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(s));</span><br><span class="line">	st-&gt;top = <span class="number">-1</span>;</span><br><span class="line">	BiTNode* p;<span class="comment">//定义一个临时变量</span></span><br><span class="line">	push(st, root);<span class="comment">//根节点进栈</span></span><br><span class="line">	<span class="keyword">while</span> (st-&gt;top != <span class="number">-1</span>) &#123;</span><br><span class="line">		<span class="comment">//取栈顶元素</span></span><br><span class="line">		<span class="keyword">while</span> ((p = getNode(st)) &amp;&amp; p) &#123;</span><br><span class="line">			push(st, p-&gt;lchild);</span><br><span class="line">		&#125;</span><br><span class="line">		pop(st);<span class="comment">//此时的栈顶元素一定是NULL，因此需要进行一次pop操作将NULL弹出</span></span><br><span class="line">		<span class="keyword">if</span> (st-&gt;top != <span class="number">-1</span>) &#123;</span><br><span class="line">			p = getNode(st);</span><br><span class="line">			pop(st);</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;当前节点是%d\n&quot;</span>, p-&gt;data);</span><br><span class="line">			push(st, p-&gt;rchild);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="二叉树的后序遍历"><a href="#二叉树的后序遍历" class="headerlink" title="二叉树的后序遍历"></a>二叉树的后序遍历</h3><p>二叉树的后续遍历的思路：</p>
+<ul>
+<li>从根节点出发，依次遍历各节点的左右子树</li>
+<li>直到当前节点左右子树遍历完成后，才访问该节点元素。</li>
+</ul>
+<p>以图一为例</p>
+<ul>
+<li>从根节点 1 开始，遍历该节点的左子树（以节点 2 为根节点）；</li>
+<li>遍历节点 2 的左子树（以节点 4 为根节点）；</li>
+<li>由于节点 4 既没有左子树，也没有右子树，此时访问该节点中的元素 4，并回退到节点 2 ，遍历节点 2 的右子树（以 5 为根节点）；</li>
+<li>由于节点 5 无左右子树，因此可以访问节点 5 ，并且此时节点 2 的左右子树也遍历完成，因此也可以访问节点 2；</li>
+<li>此时回退到节点 1 ，开始遍历节点 1 的右子树（以节点 3 为根节点）；</li>
+<li>遍历节点 3 的左子树（以节点 6 为根节点）；</li>
+<li>由于节点 6 无左右子树，因此访问节点 6，并回退到节点 3，开始遍历节点 3 的右子树（以节点 7 为根节点）；</li>
+<li>由于节点 7 无左右子树，因此访问节点 7，并且节点 3 的左右子树也遍历完成，可以访问节点 3；节点 1 的左右子树也遍历完成，可以访问节点 1；</li>
+</ul>
+<blockquote>
+<p>二叉树的后续遍历顺序是 4 5 2 6 7 3 1</p>
+</blockquote>
+<h4 id="后序遍历的递归实现"><a href="#后序遍历的递归实现" class="headerlink" title="后序遍历的递归实现"></a>后序遍历的递归实现</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PostOrderTraverse</span><span class="params">(BiTree T)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (T) &#123;</span><br><span class="line">        PostOrderTraverse(T-&gt;lchild);</span><br><span class="line">        PostOrderTraverse(T-&gt;rchild);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;当前二叉树节点的值是：%d\n&quot;</span>, T-&gt;data);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined" rel="external nofollow noreferrer">烟火小兽</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://i-fire.top/post/traverBinaryTree.html">https://i-fire.top/post/traverBinaryTree.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener external nofollow noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><a class="post-meta__tags" href="/tags/%E6%A0%91/">树</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/i-fire/blog-pic@main/usr/20201117200915.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/post/treeModel.html"><img class="next-cover" src="https://cdn.jsdelivr.net/gh/i-fire/blog-pic@main/usr/20201117200915.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">树的存储结构</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> Related Articles</span></div><div class="relatedPosts-list"><div><a href="/post/BfKmp.html" title="串的模式匹配算法"><img class="cover" src="https://cdn.jsdelivr.net/gh/i-fire/blog-pic@main/usr/20201117200915.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-03-12</div><div class="title">串的模式匹配算法</div></div></a></div><div><a href="/post/circularLinkedList.html" title="单向循环链表"><img class="cover" src="https://cdn.jsdelivr.net/gh/i-fire/blog-pic@main/usr/20201117200915.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-02-22</div><div class="title">单向循环链表</div></div></a></div><div><a href="/post/datastructure.html" title="数据结构简介"><img class="cover" src="/img/top.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-11-14</div><div class="title">数据结构简介</div></div></a></div><div><a href="/post/dynamicarray.html" title="DynamicArray 动态数组"><img class="cover" src="https://cdn.jsdelivr.net/gh/i-fire/blog-pic@main/usr/20201117200915.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-11-14</div><div class="title">DynamicArray 动态数组</div></div></a></div><div><a href="/post/linearStructureOne.html" title="线性结构（一）"><img class="cover" src="https://cdn.jsdelivr.net/gh/i-fire/blog-pic@main/usr/20201117200915.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-02-19</div><div class="title">线性结构（一）</div></div></a></div><div><a href="/post/linearStructureTwo.html" title="线性结构（）二"><img class="cover" src="https://cdn.jsdelivr.net/gh/i-fire/blog-pic@main/usr/20201117200915.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-02-19</div><div class="title">线性结构（）二</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">烟火小兽</div><div class="author-info__description">一个野生自学者的博客 java 数据结构 springboot</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">22</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">18</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/i-fire/"><i class="fab fa-github"></i><span>我的GITHUB</span></a></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>Announcement</span></div><div class="announcement_content">欢迎访问我的博客</div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86"><span class="toc-number">1.</span> <span class="toc-text">二叉树的遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%85%88%E5%BA%8F%E9%81%8D%E5%8E%86"><span class="toc-number">1.0.1.</span> <span class="toc-text">二叉树的先序遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%88%E5%BA%8F%E9%81%8D%E5%8E%86%E7%9A%84%E9%80%92%E5%BD%92%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">先序遍历的递归实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%88%E5%BA%8F%E9%81%8D%E5%8E%86%E7%9A%84%E9%9D%9E%E9%80%92%E5%BD%92%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.0.1.2.</span> <span class="toc-text">先序遍历的非递归实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86"><span class="toc-number">1.0.2.</span> <span class="toc-text">二叉树的中序遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E9%80%92%E5%BD%92%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.0.2.1.</span> <span class="toc-text">中序遍历递归实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E9%9D%9E%E9%80%92%E5%BD%92%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.0.2.2.</span> <span class="toc-text">中序遍历非递归实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86"><span class="toc-number">1.0.3.</span> <span class="toc-text">二叉树的后序遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%E7%9A%84%E9%80%92%E5%BD%92%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.0.3.1.</span> <span class="toc-text">后序遍历的递归实现</span></a></li></ol></li></ol></li></ol></li></ol></div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/traverBinaryTree.html" title="遍历二叉树"><img src="https://cdn.jsdelivr.net/gh/i-fire/blog-pic@main/usr/20201117200915.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="遍历二叉树"/></a><div class="content"><a class="title" href="/post/traverBinaryTree.html" title="遍历二叉树">遍历二叉树</a><time datetime="2021-03-19T12:45:29.000Z" title="Created 2021-03-19 20:45:29">2021-03-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/treeModel.html" title="树的存储结构"><img src="https://cdn.jsdelivr.net/gh/i-fire/blog-pic@main/usr/20201117200915.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="树的存储结构"/></a><div class="content"><a class="title" href="/post/treeModel.html" title="树的存储结构">树的存储结构</a><time datetime="2021-03-18T08:04:49.000Z" title="Created 2021-03-18 16:04:49">2021-03-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/binaryTree.html" title="二叉树"><img src="https://cdn.jsdelivr.net/gh/i-fire/blog-pic@main/usr/20201117200915.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="二叉树"/></a><div class="content"><a class="title" href="/post/binaryTree.html" title="二叉树">二叉树</a><time datetime="2021-03-13T06:53:29.000Z" title="Created 2021-03-13 14:53:29">2021-03-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/tree.html" title="树"><img src="https://cdn.jsdelivr.net/gh/i-fire/blog-pic@main/usr/20201117200915.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="树"/></a><div class="content"><a class="title" href="/post/tree.html" title="树">树</a><time datetime="2021-03-13T06:53:29.000Z" title="Created 2021-03-13 14:53:29">2021-03-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/BfKmp.html" title="串的模式匹配算法"><img src="https://cdn.jsdelivr.net/gh/i-fire/blog-pic@main/usr/20201117200915.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="串的模式匹配算法"/></a><div class="content"><a class="title" href="/post/BfKmp.html" title="串的模式匹配算法">串的模式匹配算法</a><time datetime="2021-03-11T23:47:02.000Z" title="Created 2021-03-12 07:47:02">2021-03-12</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 烟火小兽</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="icp"><a target="_blank" rel="noopener external nofollow noreferrer" href="http://www.beian.miit.gov.cn/"><img class="icp-icon" src="/img/icp.png" alt="ICP"/><span>苏ICP备19075557号</span></a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><div class="search-dialog__title" id="algolia-search-title">Algolia</div><div id="algolia-input-panel"><div id="algolia-search-input"></div></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-stats"></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="/js/search/algolia.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> {preloader.endLoading()})</script><div class="js-pjax"><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    $.getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js', function () {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      false && mermaid.init()
+    })
+  }
+}</script><script>function addGitalkSource () {
+  const ele = document.createElement('link')
+  ele.rel = 'stylesheet'
+  ele.href= 'https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css'
+  document.getElementsByTagName('head')[0].appendChild(ele)
+}
+
+function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk({
+      clientID: '1252be25a7a44652ebb9',
+      clientSecret: '6bf009a0e12a27807ecda30c0ef6b3a4887f4e1c',
+      repo: 'comments',
+      owner: 'i-fire',
+      admin: ['i-fire'],
+      id: '023fac04f71cd5b962259a3bba7fb996',
+      language: 'zh-CN',
+      perPage: 10,
+      distractionFreeMode: false,
+      pagerDirection: 'last',
+      createIssueManually: true,
+      updateCountCallback: commentCount
+    })
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    addGitalkSource()
+    $.getScript('https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js', initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.innerHTML= n
+  }
+}
+
+if ('Gitalk' === 'Gitalk' || !true) {
+  if (true) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+  bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+  bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  bp.dataset.pjax = ''
+  const s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})()</script></div></body></html>
