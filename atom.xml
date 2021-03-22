@@ -6,7 +6,7 @@
   <link href="https://i-fire.top/atom.xml" rel="self"/>
   
   <link href="https://i-fire.top/"/>
-  <updated>2021-03-21T07:05:47.182Z</updated>
+  <updated>2021-03-22T08:01:17.386Z</updated>
   <id>https://i-fire.top/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>哈夫曼树</title>
+    <link href="https://i-fire.top/post/hafuman.html"/>
+    <id>https://i-fire.top/post/hafuman.html</id>
+    <published>2021-03-22T07:58:56.000Z</published>
+    <updated>2021-03-22T08:01:17.386Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="哈夫曼树"><a href="#哈夫曼树" class="headerlink" title="哈夫曼树"></a>哈夫曼树</h1><p>哈夫曼树别名<strong>最优树</strong>，<strong>最优二叉树</strong></p><h3 id="相关术语"><a href="#相关术语" class="headerlink" title="相关术语"></a>相关术语</h3><p><img src="https://cdn.jsdelivr.net/gh/i-fire/blog-pic@main/usr/20210321163829.png"></p><ul><li>路径：在一棵树中，一个节点到另一个节点之间的通路，称为路径，在图一中从根节点到a节点之间的通路就是一条路径</li><li>路径长度：在一条路中，每经过一个节点，路径长度都要加1，例如在一棵树中，规定根节点所在的层数为1层，那么从根节点到第i层节点的路径长度为i-1，图1中从根节点到节点c的路径长度为3</li><li>节点的权：给每一个节点赋予一个新值，被称为这个节点的权，例如图一中a的权是7，b的权是5</li><li>节点的带权路径长度：指的是从根节点到该节点之间的路径长度与该节点的权的乘积，例如图一中b的权是2*5=10</li></ul><blockquote><p>树的带权路径长度为树中所有的叶子节点的带权路径长度之和，通常计作WPL，图一中这棵树的带权路径长度之和是<br>WPL = 7 * 1 + 5 * 2 + 2 * 3 + 4 * 3</p></blockquote><h3 id="哈夫曼树定义"><a href="#哈夫曼树定义" class="headerlink" title="哈夫曼树定义"></a>哈夫曼树定义</h3><p>当有n个节点（都做叶子节点且都有各自的权值）试图构建一棵树时，如果这棵树的带权路径长度最小，称这棵树为<strong>最优二叉树</strong>，也称为哈夫曼树</p><h3 id="构建哈夫曼树"><a href="#构建哈夫曼树" class="headerlink" title="构建哈夫曼树"></a>构建哈夫曼树</h3><p>在构建哈夫曼树时，要使树的带权路径长度最小只需要遵循一个原则：<strong>权值越大的节点离节点越近</strong><br>对于给定的有各自权值的 n 个结点，构建哈夫曼树有一个行之有效的办法：</p><ul><li>在n个权值中选出两个最小的权值，对应的两个节点组成一个新的二叉树，且新二叉树的根节点的权值为左右孩子的权值之和</li><li>在原有的 n 个权值中删除那两个最小的权值，同时将新的权值加入到 n–2 个权值的行列中，以此类推；</li><li>重复 1 和 2 ，直到所以的结点构建成了一棵二叉树为止，这棵树就是哈夫曼树。</li></ul><p><img src="https://cdn.jsdelivr.net/gh/i-fire/blog-pic@main/usr/20210321170952.png"></p><h3 id="哈夫曼编码"><a href="#哈夫曼编码" class="headerlink" title="哈夫曼编码"></a>哈夫曼编码</h3><p>哈夫曼编码就是在哈夫曼树的基础上构建的，这种编码方式最大的优点就是用最少的字符包含最多的信息内容。<br>根据发送信息的内容，通过统计文本中相同字符的个数作为每个字符的权值，建立哈夫曼树。对于树中的每一个子树，统一规定其左孩子标记为 0 ，右孩子标记为 1 。这样，用到哪个字符时，从哈夫曼树的根结点开始，依次写出经过结点的标记，最终得到的就是该结点的哈夫曼编码。</p><blockquote><p>文本中字符出现的次数越多，在哈夫曼树中的体现就是越接近树根。编码的长度越短。</p></blockquote><p><img src="https://cdn.jsdelivr.net/gh/i-fire/blog-pic@main/usr/20210322155106.png"></p><p>使用程序求哈夫曼编码有两种方法：</p><ol><li>从叶子结点一直找到根结点，逆向记录途中经过的标记。例如，图 3 中字符 c 的哈夫曼编码从结点 c 开始一直找到根结点，结果为：0 1 1 ，所以字符 c 的哈夫曼编码为：1 1 0（逆序输出）。</li><li>从根结点出发，一直到叶子结点，记录途中经过的标记。例如，求图 3 中字符 c 的哈夫曼编码，就从根结点开始，依次为：1 1 0。</li></ol>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;哈夫曼树&quot;&gt;&lt;a href=&quot;#哈夫曼树&quot; class=&quot;headerlink&quot; title=&quot;哈夫曼树&quot;&gt;&lt;/a&gt;哈夫曼树&lt;/h1&gt;&lt;p&gt;哈夫曼树别名&lt;strong&gt;最优树&lt;/strong&gt;，&lt;strong&gt;最优二叉树&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&quot;</summary>
+      
+    
+    
+    
+    <category term="数据结构" scheme="https://i-fire.top/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+    <category term="数据结构" scheme="https://i-fire.top/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    <category term="树" scheme="https://i-fire.top/tags/%E6%A0%91/"/>
+    
+  </entry>
   
   <entry>
     <title>树，森林，二叉树的转换</title>
@@ -36,9 +63,9 @@
     <category term="数据结构" scheme="https://i-fire.top/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-    <category term="树" scheme="https://i-fire.top/tags/%E6%A0%91/"/>
-    
     <category term="数据结构" scheme="https://i-fire.top/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    <category term="树" scheme="https://i-fire.top/tags/%E6%A0%91/"/>
     
   </entry>
   
@@ -62,9 +89,9 @@
     <category term="数据结构" scheme="https://i-fire.top/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-    <category term="树" scheme="https://i-fire.top/tags/%E6%A0%91/"/>
-    
     <category term="数据结构" scheme="https://i-fire.top/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    <category term="树" scheme="https://i-fire.top/tags/%E6%A0%91/"/>
     
   </entry>
   
@@ -88,9 +115,9 @@
     <category term="数据结构" scheme="https://i-fire.top/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-    <category term="树" scheme="https://i-fire.top/tags/%E6%A0%91/"/>
-    
     <category term="数据结构" scheme="https://i-fire.top/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    <category term="树" scheme="https://i-fire.top/tags/%E6%A0%91/"/>
     
   </entry>
   
@@ -111,9 +138,9 @@
     <category term="数据结构" scheme="https://i-fire.top/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-    <category term="树" scheme="https://i-fire.top/tags/%E6%A0%91/"/>
-    
     <category term="数据结构" scheme="https://i-fire.top/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    <category term="树" scheme="https://i-fire.top/tags/%E6%A0%91/"/>
     
   </entry>
   
@@ -455,27 +482,6 @@
     <category term="个人项目" scheme="https://i-fire.top/tags/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/"/>
     
     <category term="我爱签到网" scheme="https://i-fire.top/tags/%E6%88%91%E7%88%B1%E7%AD%BE%E5%88%B0%E7%BD%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>警醒</title>
-    <link href="https://i-fire.top/post/warn.html"/>
-    <id>https://i-fire.top/post/warn.html</id>
-    <published>2021-01-15T00:47:12.000Z</published>
-    <updated>2021-01-15T00:55:18.716Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="警戒"><a href="#警戒" class="headerlink" title="警戒"></a>警戒</h1><p>今天是2021年1月15号，谨以此文章记录一年前的今天我在某重大战役中的胜利</p><p><strong>凡事必须三思而后行</strong></p>]]></content>
-    
-    
-    <summary type="html">警戒</summary>
-    
-    
-    
-    <category term="大事记" scheme="https://i-fire.top/categories/%E5%A4%A7%E4%BA%8B%E8%AE%B0/"/>
-    
-    
-    <category term="生活" scheme="https://i-fire.top/tags/%E7%94%9F%E6%B4%BB/"/>
     
   </entry>
   
